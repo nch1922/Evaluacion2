@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'view_my_attendance' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>{{'select_subject' | translate}}</ion-label>
+    <ion-select [(ngModel)]="selectedSubject" (ionChange)="onSubjectChange()">
+      <ion-select-option *ngFor="let subject of subjects" [value]="subject">{{ subject }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-card *ngIf="attendanceRecords.length > 0">
+    <ion-card-header>
+      <ion-card-title>{{'attendance_record' | translate}}: {{ selectedSubject }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col><strong>{{'date' | translate }}</strong></ion-col>
+          <ion-col><strong>{{'attendance' | translate}}</strong></ion-col>
+        </ion-row>
+        <ion-row *ngFor="let record of filteredRecords">
+          <ion-col>{{ record.date }}</ion-col>
+          <ion-col>{{ record.attended ? 'Asistió' : 'No Asistió' }}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="attendanceRecords.length === 0">
+    <ion-card-content>
+      <p>{{'no_attendance_records_subject' | translate}}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

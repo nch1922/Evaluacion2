@@ -1,0 +1,48 @@
+// Add these styles to improve dark mode compatibility
+:host {
+  --ion-background-color: #f0f2f5;
+  --ion-text-color: #000;
+}
+
+// Improve dark mode input styling
+ion-item {
+  --background: var(--ion-color-light); // Use Ionic light color for better contrast
+  --background-activated: var(--ion-color-light);
+  --border-color: var(--ion-color-medium);
+}
+
+ion-input {
+  --background: transparent;
+  --color: var(--ion-text-color);
+  --placeholder-color: var(--ion-color-medium);
+}
+
+ion-label {
+  color: var(--ion-color-dark);
+}
+
+// Specific dark mode overrides
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: #121212; // Deep dark background
+  }
+
+  form {
+    background: #1e1e1e; // Slightly lighter than pure black
+    color: #ffffff;
+  }
+
+  ion-item {
+    --background: #2a2a2a;
+    --color: #ffffff;
+  }
+
+  ion-label {
+    color: #ffffff;
+  }
+
+  ion-input {
+    --color: #ffffff;
+    --placeholder-color: #aaaaaa;
+  }
+}

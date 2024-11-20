@@ -1,0 +1,110 @@
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->
+
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'teacher_profile' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editarPerfil()">
+        <ion-icon name="create-outline"></ion-icon> <!-- Ícono de edición -->
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Banner de perfil -->
+  <ion-row class="ion-justify-content-center ion-padding">
+    <ion-col size="12" class="ion-text-center">
+      <div class="profile-header">
+        <img class="profile-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ70I09Oetli5S6byAziCOgis15WbF5ehB7bQ&s" alt="Foto de Portada">
+      </div>
+      <div class="profile-picture-container">
+        <img class="profile-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZyb-RdYPVFoVdjepEY1kB1TvUm-LKq9gokA&s" alt="Foto de Perfil">
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <!-- Nombre del usuario y secciones de información -->
+  <ion-row class="ion-padding-horizontal">
+    <ion-col size="12" class="ion-text-center" id="cuadroNombre">
+      <h2>{{ profesorNombre }}</h2> <!-- Aquí se muestra el nombre del profe -->
+      <p>{{ profesorEmail }}</p> <!-- Correo del profe -->
+    </ion-col>
+  </ion-row>
+
+  <!-- Información personal -->
+  <ion-list lines="full">
+    
+    
+    <ion-item>
+      <ion-icon name="book-outline" slot="start"></ion-icon>
+      <ion-label>{{'professional_area' | translate}}</ion-label>
+      <ion-note slot="end">{{ profesorArea }}</ion-note>
+    </ion-item>
+    
+    <ion-item>
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-label>{{'semester' | translate}}</ion-label>
+      <ion-note slot="end">{{ profesorSemestre }}</ion-note>
+    </ion-item>
+    
+    <ion-item>
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
+      <ion-label>{{'email' | translate}}</ion-label>
+      <ion-note slot="end">{{ profesorEmail }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <!-- Sección de actividades recientes -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{'recent_activities' | translate}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Lista de actividades recientes, como asistencias -->
+      <ion-list lines="none">
+        <ion-item *ngFor="let actividad of actividadesRecientes">
+          <ion-label>
+            <h3>{{ actividad.fecha | date:'short' }}</h3>
+            <p>{{ actividad.descripcion }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <div>
+      <ion-label>{{'select_language' | translate}}</ion-label>
+    </div>
+    <div>
+      <ion-buttons slot="start">
+        <!-- Botones de cambio de idioma con íconos -->
+        <ion-button class="language-button" (click)="changeSpanish()">
+          <ion-icon name="flag-outline"></ion-icon> Español
+        </ion-button>
+        <ion-button class="language-button" (click)="changeEnglish()">
+          <ion-icon name="flag-outline"></ion-icon> English
+        </ion-button>
+      </ion-buttons>
+    </div>  
+  </ion-item>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        {{'logout' | translate}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input  name="Nombre" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellidos</ion-label>
+      <ion-input  name="Apellidos" formControlName="lastName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input  name="email" type="email" formControlName="email" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Ingrese su clave</ion-label>
+      <ion-input  name="password" type="password" formControlName="password" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Repita la clave</ion-label>
+      <ion-input  name="password" type="password" formControlName="password2" ></ion-input>
+    </ion-item>
+
+    <!-- Selección del tipo de usuario -->
+    <ion-radio-group formControlName="tipo_usuario">
+      <ion-list-header>
+        <ion-label>Selecciona tu tipo de usuario</ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Profesor</ion-label>
+        <ion-radio slot="start" value="profesor"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Alumno</ion-label>
+        <ion-radio slot="start" value="alumno"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    <ion-button expand="full"  (click)="registrarUsuario()">Registrar</ion-button>
+  </form>
+</ion-content>

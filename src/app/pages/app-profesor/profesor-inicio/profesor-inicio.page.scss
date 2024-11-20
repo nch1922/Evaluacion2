@@ -1,0 +1,47 @@
+// Existing styles
+ol, ul {
+  list-style-type: none;
+  padding-left: 10px;
+  margin: 0;
+}
+
+// New professional styling
+ion-content {
+  --background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+ion-card {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  margin: 15px;
+  transition: transform 0.3s ease;
+}
+
+ion-card:hover {
+  transform: scale(1.02);
+}
+
+ion-list-header {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6815ec;
+}
+
+ion-item {
+  --padding-start: 15px;
+  --inner-padding-end: 15px;
+  margin: 5px 0;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+ion-item:hover {
+  --background: rgba(104, 21, 236, 0.1);
+}
+
+ion-checkbox {
+  --size: 24px;
+  --checkbox-background-checked: #6815ec;
+  --border-radius: 6px;
+}

@@ -1,0 +1,77 @@
+ion-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: skyblue;
+    height: 100%;
+  }
+  
+  .login-container {
+    max-width: 380px; // Reduced max-width
+    width: 90%; // Responsive width
+    padding: 30px; // Reduced padding
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: auto;
+  }
+  
+  .logo {
+    width: 150px; // Smaller logo
+    max-width: 65%;
+    height: auto;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+  }
+  
+  ion-item {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e1e1e1;
+    width: 100%;
+  }
+  
+  .login-button {
+    --background: linear-gradient(to right, #e8eaf4, #0073f5);
+    --border-radius: 25px;
+    height: 45px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    width: 100%;
+  }
+  
+  @media (max-width: 360px) {
+    .login-container {
+      max-width: 320px;
+      padding: 20px;
+      width: 95%;
+    }
+  
+    .logo {
+      width: 120px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .login-container {
+      max-width: 450px;
+      padding: 40px;
+    }
+  
+    .logo {
+      width: 180px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .login-container {
+      max-width: 500px;
+      padding: 50px;
+    }
+  
+    .logo {
+      width: 200px;
+    }
+  }
