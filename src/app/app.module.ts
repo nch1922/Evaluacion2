@@ -13,9 +13,17 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
+  //imports para firebase
 import { initializeApp } from 'firebase/app';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
+  //imports para generar el codigo qr
+
+
+
+
+
 
 export const firebaseConfig = { //configuracion de firebase
   apiKey: "AIzaSyA80eZKUyiUUQP6Rh-CQfZMScWLB-SyVnw",
@@ -39,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient){
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     IonicModule.forRoot({ mode: 'md' }), 
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,

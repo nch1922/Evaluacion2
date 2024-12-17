@@ -24,13 +24,24 @@
   <!-- Botón para escanear el código QR -->
   <ion-row>
     <ion-col size="12" class="ion-text-center">
-      <ion-button expand="block" (click)="escanearQR()" class="qr-button" color="success"> <!-- Color verde para llamar la atención -->
+      <!-- Video para escaneo QR -->
+      <video #videoElement style="width: 100%; max-width: 400px; height: auto; margin: 0 auto;"></video>
+      
+      <!-- Botón para escanear QR -->
+      <ion-button expand="block" (click)="escanearQR()" class="qr-button" color="success" style="margin-top: 10px;">
         <ion-icon name="qr-code-outline" slot="start"></ion-icon>
         {{'scan_qr_code' | translate}}
       </ion-button>
+
+       <!-- Botón para cambiar la cámara -->
+    <ion-button expand="block" (click)="toggleCamera()" class="qr-button" color="primary" style="margin-top: 10px;">
+      <ion-icon name="camera-reverse" slot="start"></ion-icon>
+      {{'toggle_camera' | translate}}
+    </ion-button>
+
     </ion-col>
   </ion-row>
-
+  
   <!-- Lista de opciones del alumno -->
   <ion-list>
     <ion-list-header>

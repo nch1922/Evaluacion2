@@ -24,7 +24,7 @@ export class RegistroPage implements OnInit {
   form = new FormGroup({
     uid: new FormControl(""),
     name: new FormControl("",[Validators.required, Validators.minLength(4)]),
-    lastName: new FormControl("",[Validators.required, Validators.minLength(4)]),
+    lastName: new FormControl("",[Validators.required, Validators.minLength(2)]),
     email: new FormControl("",[Validators.required, Validators.email]),
     password: new FormControl("",[Validators.required, Validators.minLength(6)]),
     password2: new FormControl("",[Validators.required, Validators.minLength(6)]),
@@ -42,17 +42,18 @@ export class RegistroPage implements OnInit {
   }
 
   async registrarUsuario() {
+    const loading = await this.utilsService.loading();
+    
     if (this.form.valid) {
       // Validar que las contraseñas coincidan
       if (this.form.value.password !== this.form.value.password2) {
         await this.mostrarAlerta('Error', 'Las contraseñas no coinciden');
         return;
       }
-
+  
       try {
-        const loading = await this.utilsService.loading();
         await loading.present();
-
+  
         // Crear objeto de usuario sin password2
         const userData: User = {
           email: this.form.value.email,
@@ -62,23 +63,43 @@ export class RegistroPage implements OnInit {
           tipo_usuario: this.form.value.tipo_usuario,
           img: ''
         };
-
+  
         const resp = await this.firebaseService.signUp(userData);
-
+  
         if (resp && resp.user) {
-          await this.mostrarAlerta('¡Éxito!', 'Usuario registrado correctamente');
-          
-          this.router.navigate(['login']);
-          this.form.reset();
-          loading.dismiss();
+          try {
+            // Enviar correo de verificación
+            await this.firebaseService.sendVerificationEmail();
+            
+            await this.mostrarAlerta(
+              '¡Éxito!', 
+              'Usuario registrado correctamente. Por favor, verifica tu correo electrónico.'
+            );
+  
+            // Cerrar sesión después de enviar el correo de verificación
+            await this.firebaseService.signOut();
+            
+            this.router.navigate(['login']);
+            this.form.reset();
+          } catch (verificationError) {
+            console.error('Error al enviar correo de verificación:', verificationError);
+            await this.mostrarAlerta(
+              'Error', 
+              'El usuario se creó pero hubo un problema al enviar el correo de verificación. Por favor, intenta iniciar sesión y solicitar un nuevo correo de verificación.'
+            );
+          }
         }
-
       } catch (error) {
         console.error('Error en registro:', error);
         await this.mostrarMensajeError(error.code);
+      } finally {
+        loading.dismiss();
       }
     } else {
-      await this.mostrarAlerta('Formulario Inválido', 'Por favor, complete todos los campos correctamente');
+      await this.mostrarAlerta(
+        'Formulario Inválido', 
+        'Por favor, complete todos los campos correctamente'
+      );
     }
   }
 
@@ -130,30 +151,6 @@ export class RegistroPage implements OnInit {
   }
   
   //-----------------------------------------------------------//
-  async guardar2(){ 
-    console.log("entro a la funcion");
-    if(this.form.valid){
-      console.log("dentro del if");
-      const loading = await this.utilsService.loading();
-      await loading.present();
-      this.firebaseService.signUp(this.form.value as User)
-        .then(async resp =>{
-          console.log("guardando usuario");
-          await this.firebaseService.updateUser(this.form.value.name)
-          
-          let uid = resp.user.uid;
-          this.form.controls.uid.setValue(uid)
-          //funcion del seteo
-          this.setUserInfo(uid);
-
-        }).catch(error => {
-          console.log(error);
-        }).finally(()=>{
-          loading.dismiss();
-        })
-      
-    }
-  }
 
   async setUserInfo(uid: string ){
     if(this.form.valid){

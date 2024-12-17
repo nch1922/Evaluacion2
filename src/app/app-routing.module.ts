@@ -30,7 +30,6 @@ const routes: Routes = [
   },
   {
     path: 'alumno-historial-asistencia',
-    canActivate: [authGuard],
     loadChildren: () => import('./pages/app-alumno/alumno-historial-asistencia/alumno-historial-asistencia.module').then( m => m.AlumnoHistorialAsistenciaPageModule)
   },
   {

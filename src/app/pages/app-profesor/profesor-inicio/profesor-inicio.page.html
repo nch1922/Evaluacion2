@@ -24,25 +24,26 @@
   <!-- Botón para generar el código QR -->
   <ion-row>
     <ion-col size="12" class="ion-text-center">
-      <ion-button expand="block" (click)="generarQR()" color="tertiary">
+      <ion-button expand="block" (click)="limpiarCodigoQR()" color="tertiary">
         <ion-icon name="qr-code-outline" slot="start"></ion-icon>
-        {{'generate_qr_code' | translate}}
+        {{'clean_QR_code' | translate}}
       </ion-button>
     </ion-col>
   </ion-row>
 
+  <div *ngIf="codigoQR" class="ion-text-center ion-padding">
+    <img [src]="codigoQR" alt="Código QR" />
+  </div>
+
   <!-- Lista de Secciones y Asignaturas -->
-  <ol> 
-    <li *ngFor="let seccion of secciones | keyvalue; let i = index">
-      <!-- Cada sección es un item  que despliega asignaturas al hacer clic -->
-      
+  <ol>
+    <li *ngFor="let seccion of secciones | keyvalue">
       <ion-item button (click)="toggleAsignaturas(seccion.key)">
         <ion-icon name="school-outline" slot="start"></ion-icon>
-        <ion-label> {{'section' | translate}} {{ seccion.key }}</ion-label>
+        <ion-label>{{ 'section' | translate }} {{ seccion.key }}</ion-label>
         <ion-icon [name]="isAsignaturasVisible(seccion.key) ? 'chevron-up' : 'chevron-down'" slot="end"></ion-icon>
       </ion-item>
 
-      <!-- Lista de asignaturas que se despliega al hacer clic en la sección -->
       <ul *ngIf="isAsignaturasVisible(seccion.key)">
         <li *ngFor="let asignatura of seccion.value">
           <ion-item (click)="seleccionarAsignatura(asignatura)">
@@ -50,13 +51,13 @@
             <ion-label>{{ asignatura }}</ion-label>
             <ion-checkbox 
               [checked]="asignaturasSeleccionadas[seccion.key]?.[asignatura] || false" 
-              (ionChange)="toggleCheckbox( seccion.key, asignatura)"
+              (ionChange)="toggleCheckbox(seccion.key, asignatura)"
               [disabled]="checkboxBloqueado && !asignaturasSeleccionadas[seccion.key]?.[asignatura]"
               slot="end">
-            </ion-checkbox>
+            </ion-checkbox> 
           </ion-item>
         </li>
-      </ul>      
+      </ul>
     </li>
   </ol>
 
